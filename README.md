@@ -6,8 +6,6 @@
 [![Kali Linux](https://img.shields.io/badge/Kali-Linux-557C94?style=for-the-badge)](https://www.kali.org/)
 
 **Project type:** Controlled cybersecurity home-lab exercise  
-**Author:** Alexander Cox  
-**Source evidence:** `Cyber Home Lab Doc 1.docx` — original embedded images 49–75 and 81  
 **Scope:** pfSense gateway configuration, firewall policy, NAT/SSH access, package-based Snort detection, rule validation, and blocking views.
 
 ## Objective
@@ -40,39 +38,6 @@ The project demonstrates both **network access control** (firewall/NAT) and **ne
 | [Snort](https://www.snort.org/) | Rule-based traffic detection as an add-on package inside pfSense |
 | Windows Command Prompt | ICMP connectivity tests to the pfSense WAN address |
 
-## Lab topology — based on observed addresses
-
-The relevant screenshots show **two IPv4 networks** and two pfSense interfaces. The diagram below is a logical interpretation of the addresses and NAT test; it does **not** imply that all later screenshots were recorded at the same moment.
-
-```text
-                 VirtualBox / physical host-side LAN
-                      192.168.100.0/24
-                               |
-          +--------------------+--------------------+
-          |                    |                    |
-     Windows / PuTTY      Kali Linux eth0      pfSense WAN (em0)
-       test client        192.168.100.207      192.168.100.245
-          |                                          |
-          +-- SSH to 192.168.100.245:22 --> [NAT]   |
-                                                     |
-                                            pfSense LAN (em1)
-                                              172.30.2.1/24
-                                                     |
-                                           internal pfVulnlab1
-                                              172.30.2.0/24
-                                                     |
-                                   +-----------------+----------------+
-                                   |                                  |
-                              Kali Linux eth1                Metasploitable 2
-                               172.30.2.100                     172.30.2.102
-                                                                      ^
-                                                                      |
-                                              WAN port forward targets this IP
-
-                     Snort package monitors pfSense LAN traffic
-```
-
-**Important:** The screenshot of the extra `OPT1` rule near the end shows a **different subnet** (`172.60.1.0/24`) in a separate lab configuration. It is documented independently rather than falsely inserted into this specific 172.30.2.0/24 layout.
 
 | Component | Address / interface | Evidence |
 |---|---|---|
@@ -411,7 +376,6 @@ This shows that the larger home lab also experimented with **additional interfac
 
 ## Evidence inventory
 
-- **28 original pfSense-related screenshots** are embedded throughout this README (source images 49–75 plus 81).
 - Every image is saved under [`screenshots/`](screenshots/).
 - See [`SCREENSHOT-GUIDE.md`](SCREENSHOT-GUIDE.md) for the exact mapping between original image numbers, filenames, and explanations.
 - See [`rules/pfSense-snort-custom.rules`](rules/pfSense-snort-custom.rules) for a reusable transcription of the custom pfSense Snort signatures.
@@ -424,5 +388,3 @@ This home-lab exercise combines **pfSense firewall administration**, **subnet co
 
 **Author:** Alexander Cox  
 [GitHub Portfolio](https://github.com/KerberosAC) · [LinkedIn](https://www.linkedin.com/in/alexandercox25/)
-
-**Responsible use:** All described tests were performed as part of a controlled educational lab. Do not expose vulnerable practice systems publicly or replicate broad forwarding rules in a production network.
