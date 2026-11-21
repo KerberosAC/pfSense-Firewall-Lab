@@ -1,0 +1,5 @@
+# Transcribed from Cyber Home Lab Doc 1.docx, original image66.png.
+# Option terminators were normalized with final semicolons.
+# These are alert signatures only; blocking depends on Snort interface settings.
+alert icmp any any -> $HOME_NET any (msg:"Ping Detected"; sid:1000001; rev:1;)
+alert tcp any any -> $HOME_NET 22 (msg:"SSH Detected"; sid:1000002; rev:1;)
